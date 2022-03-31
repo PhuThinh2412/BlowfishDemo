@@ -290,7 +290,13 @@ namespace BlowFishCS
             int j = 0;
             for (int i = 0; i < 18; i++)
             {
-                uint d = (uint)(((key[j % cipherKey.Length] * 256 + key[(j + 1) % cipherKey.Length]) * 256 + key[(j + 2) % cipherKey.Length]) * 256 + key[(j + 3) % cipherKey.Length]);
+                uint d = (uint)((
+                    (
+                    key[j % cipherKey.Length] * 256 + 
+                    key[(j + 1) % cipherKey.Length]) * 256 + 
+                    key[(j + 2) % cipherKey.Length]) * 256 + 
+                    key[(j + 3) % cipherKey.Length]
+                    );
                 bf_P[i] ^= d;
                 j = (j + 4) % cipherKey.Length;
             }
@@ -466,9 +472,7 @@ namespace BlowFishCS
             GetBlock(ref block);
         }
 
-        /// <summary>
         /// Splits the block into the two uint values
-        /// </summary>
         /// <param name="block">the 64 bit block to setup</param>
         private void SetBlock(byte[] block)
         {
@@ -492,9 +496,7 @@ namespace BlowFishCS
             }
         }
 
-        /// <summary>
         /// Converts the two uint values into a 64 bit block
-        /// </summary>
         /// <param name="block">64 bit buffer to receive the block</param>
         private void GetBlock(ref byte[] block)
         {
@@ -519,9 +521,7 @@ namespace BlowFishCS
             Buffer.BlockCopy(block2, 0, block, 4, 4);
         }
 
-        /// <summary>
         /// Runs the blowfish algorithm (standard 16 rounds)
-        /// </summary>
         private void encipher()
         {
             xl_par ^= bf_P[0];
@@ -538,9 +538,7 @@ namespace BlowFishCS
             xr_par = swap;
         }
 
-        /// <summary>
         /// Runs the blowfish algorithm in reverse (standard 16 rounds)
-        /// </summary>
         private void decipher()
         {
             xl_par ^= bf_P[17];

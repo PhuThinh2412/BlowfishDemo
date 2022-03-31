@@ -32,7 +32,7 @@ namespace BlowFish1
 
             BlowFish blowfishAlgorithm = new BlowFish(hexKey); //caohochutech
             
-            string cipherText = blowfishAlgorithm.Encrypt_CBC(plainText);
+            string cipherText = blowfishAlgorithm.Encrypt_ECB(plainText); // Normal mode
             rtbCipherText.Text = cipherText;
             //MessageBox.Show(cipherText, "Encrypted Message");
 
